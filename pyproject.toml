@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "dockerbot"
+version = "0.1.0"
+description = "A bot to work with Docker"
+authors = ["Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+httpx = "^0.26.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+pytest-asyncio = "^0.23.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
