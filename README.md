@@ -10,6 +10,7 @@ Un Bot en **Python** para interactuar con Docker.
 - [Dockerbot](#dockerbot)
   - [Indice](#indice)
   - [Pasos iniciales](#pasos-iniciales)
+    - [Añadimos dependencias](#añadimos-dependencias)
   - [Capturas de pantalla](#capturas-de-pantalla)
   - [Módulos de Python](#módulos-de-python)
   - [Funcionando localmente](#funcionando-localmente)
@@ -20,10 +21,17 @@ Un Bot en **Python** para interactuar con Docker.
 
 ## Pasos iniciales
 
-- Crear el archivo `.gitignore`
-- Crear el archivo `LICENSE`
-- Generar el archivo `README.md`
+- Crea el archivo `.gitignore`
+- Crea el archivo `LICENSE`
+- Crea el archivo `README.md`
 - Ejecutar `poetry init` desde la terminal incorporada de *Visual Studio Code*. Esto te guiará por la creación del archivo `pyproject.toml`. No añadas ninguna dependencia, esto lo haremos directamente desde la extensión que hemos configurado para ello.
+- Crea los directorios `src` y `test`, donde estará tu código y los tests respectivamente.
+- Inicializa el repositorio git con un `git init`.
+- Crea el archivo `.env` donde guardarás las variables de entorno y añade este archivo a `.gitignore`, para que no se haga control de versiones de este archivo.
+
+### Añadimos dependencias
+
+Uno de las extensiones que hemos instalado en *Visual Studio Code* se encarga de añadir dependencias a *Poetry*. Desde la paleta de comandos añade la primera de las depndencias que vamos a utilizar, que no es, ni mas ni menos, que `httpx`, que es un módulo que nos permite realizar llamadas de forma asíncrona.
 
 ## Capturas de pantalla
 
