@@ -1,7 +1,6 @@
-
 # Dockerbot
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)  
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 Un Bot en **Python** para interactuar con Docker.
 
@@ -24,18 +23,18 @@ Un Bot en **Python** para interactuar con Docker.
 - Crea el archivo `.gitignore`
 - Crea el archivo `LICENSE`
 - Crea el archivo `README.md`
-- Ejecutar `poetry init` desde la terminal incorporada de *Visual Studio Code*. Esto te guiará por la creación del archivo `pyproject.toml`. No añadas ninguna dependencia, esto lo haremos directamente desde la extensión que hemos configurado para ello.
+- Ejecutar `poetry init` desde la terminal incorporada de _Visual Studio Code_. Esto te guiará por la creación del archivo `pyproject.toml`. No añadas ninguna dependencia, esto lo haremos directamente desde la extensión que hemos configurado para ello.
 - Crea los directorios `src` y `test`, donde estará tu código y los tests respectivamente.
 - Inicializa el repositorio git con un `git init`.
 - Crea el archivo `.env` donde guardarás las variables de entorno y añade este archivo a `.gitignore`, para que no se haga control de versiones de este archivo.
 
 ### Añadimos dependencias
 
-Uno de las extensiones que hemos instalado en *Visual Studio Code* se encarga de añadir dependencias a *Poetry*. Desde la paleta de comandos añade la primera de las depndencias que vamos a utilizar, que no es, ni mas ni menos, que `httpx`, que es un módulo que nos permite realizar llamadas de forma asíncrona.
+Uno de las extensiones que hemos instalado en _Visual Studio Code_ se encarga de añadir dependencias a _Poetry_. Desde la paleta de comandos añade la primera de las depndencias que vamos a utilizar, que no es, ni mas ni menos, que `httpx`, que es un módulo que nos permite realizar llamadas de forma asíncrona.
 
 ## Capturas de pantalla
 
-## Módulos de Python  
+## Módulos de Python
 
 ## Funcionando localmente
 
@@ -43,17 +42,18 @@ Uno de las extensiones que hemos instalado en *Visual Studio Code* se encarga de
 
 Para hacer funcionar este proyecto necistarás añadir al menos la siguiente variable de entorno a tu archivo `.env`,
 
-* `TELEGREM_BOT_TOKEN`
+- `TELEGRAM_BOT_TOKEN`
 
 ## Mas información
 
-* [Pyldoras Pythonicas](https://atareao.es/pyldoras)
-* [Historias de un Pythonico](https://atareao.es/python)
+- [Pyldoras Pythonicas](https://atareao.es/pyldoras)
+- [Historias de un Pythonico](https://atareao.es/python)
 
 ## Feedback
 
 Sabes que amo el feedback, si tienes cualquier idea o sugerencia, por favor, hazmela saber directamente en [atareao.es](https://atareao.es)
 
-## Licencia  
+## Licencia
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
