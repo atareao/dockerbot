@@ -6,7 +6,7 @@ default:
     @just --list
 
 prun:
-    @poetry run python src/main.py
+    poetry run python src/main.py
 
 ptest:
-    @poetry run python
+    poetry run python

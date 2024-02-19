@@ -8,8 +8,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-httpx = "^0.26.0"
 python-dotenv = "^1.0.1"
+aiohttp = "^3.9.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"

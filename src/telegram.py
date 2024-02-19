@@ -24,7 +24,7 @@
 """
 
 import logging
-from httpx import AsyncClient
+from aiohttp import ClientSession
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +55,8 @@ class Telegram:
             "Content-Type": "application/json"
         }
 
-    async def send_message(self, chat_id: int, thread_id: int, message: str):
+    async def send_message(
+            self, chat_id: int, thread_id: int, message: str) -> dict:
         """Send message to Telegram
 
         Args:
@@ -75,10 +76,9 @@ class Telegram:
             "text": message
         }
         logger.debug(payload)
-        async with AsyncClient() as client:
-            response = await client.post(
-                url, headers=self._headers, json=payload
-            )
-            logger.debug(response)
-            if response.status_code == 200:
-                return response.json()
+        async with ClientSession() as session:
+            async with session.post(
+                    url, headers=self._headers, json=payload) as response:
+                logger.debug(response)
+                if response.status == 200:
+                    return response.json()
