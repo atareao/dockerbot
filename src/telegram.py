@@ -41,15 +41,21 @@ class Telegram:
     """A class to work with Telegram
     """
 
-    def __init__(self, url: str, token: str):
+    def __init__(self, url: str, token: str, offset: int = 0,
+                 timeout: int = 300):
         """Init Telegram class
 
         Args:
             url (str): base url for telegram
             token (str): token for bot
+            offset (int): identifier of the frist update to be returned
+            timeout (int): timeout in seconds for long polling
         """
         logger.info("__info__")
+        print(f"Token: {token}")
         self._url = f"https://{url}/bot{token}"
+        self._offset = offset
+        self._timeout = timeout
         self._headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -69,11 +75,12 @@ class Telegram:
         """
         logger.info("send_message")
         url = f"{self._url}/sendMessage"
+        print(url)
         payload = {
             "chat_id": chat_id,
             "message_thread_id": thread_id,
-            "parse_mode": "markdown",
-            "text": message
+            "text": message,
+            "parse_mode": "markdown"
         }
         logger.debug(payload)
         async with ClientSession() as session:
@@ -81,4 +88,55 @@ class Telegram:
                     url, headers=self._headers, json=payload) as response:
                 logger.debug(response)
                 if response.status == 200:
-                    return response.json()
+                    return await response.json()
+                print(response.status)
+                print(await response.json())
+        raise Exception()
+
+    async def get_me(self) -> dict:
+        """
+        A simple method for testing your bot's authentication token.
+
+        Returns
+        -------
+        dict
+            basic information about the bot in form of a User object.
+        """
+        logger.info("get_me")
+        url = f"{self._url}/getMe"
+        async with ClientSession() as session:
+            async with session.post(
+                    url, headers=self._headers) as response:
+                logger.debug(response)
+                if response.status == 200:
+                    return await response.json()
+                print(response.status)
+                print(await response.json())
+        raise Exception()
+
+    async def get_updates(self) -> dict:
+        """
+        Receive incoming updates using log polling
+
+        Returns
+        -------
+        dict
+            Updates
+        """
+        logger.info("get_updates")
+        url = f"{self._url}/getUpdates"
+        params = {
+            "offset": self._offset,
+            "timeout": self._timeout
+        }
+        logger.debug(params)
+        async with ClientSession() as session:
+            async with session.post(
+                    url, headers=self._headers, params=params) as response:
+                logger.debug(response)
+                if response.status == 200:
+                    return await response.json()
+                print(response.status)
+                print(await response.json())
+        raise Exception()
+
