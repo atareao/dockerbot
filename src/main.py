@@ -60,7 +60,7 @@ async def main():
                 await telegram_client.send_message(chat_id, thread_id, message)
 
 
-def process_event(event: dict) -> str:
+def process_event(event: dict) -> str | None:
     """Process event
 
     Args:

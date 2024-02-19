@@ -5,8 +5,8 @@ version := `git tag -l | tail -n1`
 default:
     @just --list
 
-prun:
+run:
     @poetry run python src/main.py
 
-ptest:
-    @poetry run python
+test:
+    @poetry run pytest
