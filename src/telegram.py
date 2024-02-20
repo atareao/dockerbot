@@ -82,16 +82,7 @@ class Telegram:
             "text": message,
             "parse_mode": "markdown"
         }
-        logger.debug(payload)
-        async with ClientSession() as session:
-            async with session.post(
-                    url, headers=self._headers, json=payload) as response:
-                logger.debug(response)
-                if response.status == 200:
-                    return await response.json()
-                print(response.status)
-                print(await response.json())
-        raise Exception()
+        return await self._post("sendMessage", payload)
 
     async def get_me(self) -> dict:
         """
@@ -102,17 +93,7 @@ class Telegram:
         dict
             basic information about the bot in form of a User object.
         """
-        logger.info("get_me")
-        url = f"{self._url}/getMe"
-        async with ClientSession() as session:
-            async with session.post(
-                    url, headers=self._headers) as response:
-                logger.debug(response)
-                if response.status == 200:
-                    return await response.json()
-                print(response.status)
-                print(await response.json())
-        raise Exception()
+        return await self._get("getMe", {})
 
     async def get_updates(self) -> dict:
         """
@@ -123,20 +104,87 @@ class Telegram:
         dict
             Updates
         """
-        logger.info("get_updates")
-        url = f"{self._url}/getUpdates"
         params = {
             "offset": self._offset,
             "timeout": self._timeout
         }
-        logger.debug(params)
+        return await self._get("getUpdates", params)
+
+    async def set_webhook(self, url: str) -> dict:
+        """Set webhook
+
+        Parameters
+        ----------
+        url : str
+            url to webhook
+
+        Returns
+        -------
+        dict
+            response
+        """
+        payload = {"url": url}
+        return await self._post("setWebhook", payload)
+
+    async def delete_webhook(self) -> dict:
+        """[TODO:description]
+
+        Returns
+        -------
+        bool
+            True on success
+        """
+        return await self._post("deleteWebhook", {})
+
+    async def get_webhook_info(self) -> dict:
+        """get Webhook info
+
+        Returns
+        -------
+        dict
+            info about webhook
+        """
+        return await self._get("getWebhookInfo", {})
+
+    async def _post(self, endpoint: str, payload: dict) -> dict:
+        """
+        do a post
+
+        Returns
+        -------
+        dict
+            response
+        """
+        url = f"{self._url}/{endpoint}"
+        logger.info(f"Url: {url}. Payload: {payload}")
         async with ClientSession() as session:
             async with session.post(
+                    url, headers=self._headers, json=payload) as response:
+                logger.debug(response)
+                if response.status == 200:
+                    return await response.json()
+                logger.debug(response.status)
+                logger.debug(await response.json())
+        raise Exception()
+
+    async def _get(self, endpoint: str, params: dict) -> dict:
+        """
+        do a get
+
+        Returns
+        -------
+        dict
+            response
+        """
+        url = f"{self._url}/{endpoint}"
+        logger.info(f"Url: {url}. Params: {params}")
+        async with ClientSession() as session:
+            async with session.get(
                     url, headers=self._headers, params=params) as response:
                 logger.debug(response)
                 if response.status == 200:
                     return await response.json()
-                print(response.status)
-                print(await response.json())
+                logger.debug(response.status)
+                logger.debug(await response.json())
         raise Exception()
 

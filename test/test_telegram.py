@@ -25,12 +25,15 @@ async def test_telegram_get_me():
     """Test telegram class
     """
     if telegram:
-        response = await telegram.get_me()
+        try:
+            response = await telegram.get_me()
+        except Exception as exception:
+            pytest.fail(f"Error: {exception}")
     else:
         response = None
     logger.debug(response)
-    assert response is not None
-    assert response != ""
+    if not response or not isinstance(response, dict):
+        pytest.fail("No info about me")
 
 
 @pytest.mark.asyncio
@@ -39,12 +42,15 @@ async def test_telegram_send_message():
     """
     message = "This is a test messages"
     if telegram:
-        response = await telegram.send_message(chat_id, thread_id, message)
+        try:
+            response = await telegram.send_message(chat_id, thread_id, message)
+        except Exception as exception:
+            pytest.fail(f"Error: {exception}")
     else:
         response = None
     logger.debug(response)
-    assert response is not None
-    assert response != ""
+    if not response or not isinstance(response, dict):
+        pytest.fail("Message not send")
 
 
 @pytest.mark.asyncio
@@ -52,9 +58,28 @@ async def test_telegram_get_updates():
     """Test telegram class
     """
     if telegram:
-        response = await telegram.get_updates()
+        try:
+            response = await telegram.get_updates()
+        except Exception as exception:
+            pytest.fail(f"Error: {exception}")
     else:
         response = None
     logger.debug(response)
-    assert response is not None
-    assert response != ""
+    if not response or not isinstance(response, dict):
+        pytest.fail("There is no updates")
+
+
+@pytest.mark.asyncio
+async def test_telegram_get_webhook_info():
+    """Test get webhook info method of Telegram class
+    """
+    if telegram:
+        try:
+            response = await telegram.get_webhook_info()
+        except Exception as exception:
+            pytest.fail(f"Error: {exception}")
+    else:
+        response = None
+    logger.debug(response)
+    if not response or not isinstance(response, dict):
+        pytest.fail("No webhook info")
