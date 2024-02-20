@@ -31,19 +31,18 @@ Un Bot en **Python** para interactuar con Docker.
 
 ### Añadimos dependencias
 
-Uno de las extensiones que hemos instalado en *Visual Studio Code* se encarga de añadir dependencias a *Poetry*. Desde la paleta de comandos añade la primera de las depndencias que vamos a utilizar, que no es, ni mas ni menos, que `httpx`, que es un módulo que nos permite realizar llamadas de forma asíncrona.
+Uno de las extensiones que hemos instalado en *Visual Studio Code* se encarga de añadir dependencias a *Poetry*. Desde la paleta de comandos añade la primera de las dependencias que vamos a utilizar, que no es, ni mas ni menos, que `aiohttp`, que es un módulo que nos permite realizar llamadas de forma asíncrona.
 
-## Capturas de pantalla
+Inicialmente había indicado `httpx` sin embargo, dado que el módulo de Python para Docker también utiliza `aiohttp`, voy a decantarme por este. Pero, elige tu el que consideres
 
-## Módulos de Python  
 
 ## Funcionando localmente
 
 ## Variables de entorno
 
-Para hacer funcionar este proyecto necistarás añadir al menos la siguiente variable de entorno a tu archivo `.env`,
+Para hacer funcionar este proyecto encastarás añadir al menos la siguiente variable de entorno a tu archivo `.env`,
 
-* `TELEGREM_BOT_TOKEN`
+* `TELEGRAM_BOT_TOKEN`
 
 ## Mas información
 
