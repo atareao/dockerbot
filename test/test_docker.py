@@ -3,41 +3,32 @@
 """Tests
 """
 
-import os
-import asyncio
+import logging
 import pytest
 from src.docker import Docker
 
+logger = logging.getLogger(__name__)
 pytest_plugins = ("pytest_asyncio",)
-
 socket = "/run/user/1000/docker.sock"
-docker = Docker(socket)
-
-
-@pytest.fixture(scope="session")
-def event_loop():
-    return asyncio.get_event_loop()
-
-
-@pytest.fixture(scope="session")
-def get_docker():
-    socket = "/run/user/1000/docker.sock"
-    return Docker(socket)
 
 
 @pytest.mark.asyncio
-async def test_get_containers(get_docker):
+async def test_get_containers():
     """Test telegram class
     """
-    containers = await get_docker.get_containers()
-    assert containers is not None
+    docker = Docker(socket)
+    containers = await docker.get_containers()
+    logger.debug(containers)
+    if containers is None:
+        pytest.fail("Can not get containers")
 
 
 @pytest.mark.asyncio
 async def test_get_images():
     """Test telegram class
     """
-    docker = Docker("/run/user/1000/docker.sock")
+    docker = Docker(socket)
     images = await docker.get_images()
-    assert images is not None
-
+    logger.debug(images)
+    if images is None:
+        pytest.fail("Can not get images")
