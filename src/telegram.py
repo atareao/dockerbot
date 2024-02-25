@@ -187,4 +187,3 @@ class Telegram:
                 logger.debug(response.status)
                 logger.debug(await response.json())
         raise Exception()
-

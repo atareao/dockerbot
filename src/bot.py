@@ -21,10 +21,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import logging
 from src.telegram import Telegram
-
-logger = logging.getLogger(__name__)
+from src import log
 
 
 class BotException(Exception):
@@ -32,6 +30,6 @@ class BotException(Exception):
 
 
 class Bot:
+    @log.debug
     def __init__(self, url, token, offset, timeout=300):
-        logger.debug("__init__")
         self._telegram = Telegram(url, token, offset, timeout)
